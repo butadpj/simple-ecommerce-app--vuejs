@@ -17,7 +17,7 @@ const app = new Vue({
               variantImage: "./images/headphone-red.jpg",
             },
             {
-              id: 0,
+              id: 1,
               name: "blue",
               inventory: 0,
               variantImage: "./images/headphone-blue.jpg",
@@ -27,22 +27,28 @@ const app = new Vue({
       },
       {
         id: 1,
-        name: "BRO Headphones 2400G",
+        name: "Sperry Boat Men Shoes",
         inventory: 5,
-        image: "./images/headphone-red.jpg",
+        image: "./images/shoes-red.jpg",
         variants: {
           colors: [
             {
               id: 0,
               name: "red",
-              inventory: 5,
-              variantImage: "./images/headphone-red.jpg",
+              inventory: 10,
+              variantImage: "./images/shoes-red.jpg",
             },
             {
-              id: 0,
-              name: "blue",
-              inventory: 0,
-              variantImage: "./images/headphone-blue.jpg",
+              id: 1,
+              name: "orange",
+              inventory: 5,
+              variantImage: "./images/shoes-orange.jpg",
+            },
+            {
+              id: 2,
+              name: "purple",
+              inventory: 10,
+              variantImage: "./images/shoes-purple.jpg",
             },
           ],
         },

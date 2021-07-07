@@ -7,7 +7,7 @@
   --primary-1: rgb(39, 148, 103);
   --secondary: rgb(35, 105, 146);
   --warning: rgb(228, 131, 40);
-  --danger: rgb(170, 65, 70);
+  --danger: rgb(226, 37, 47);
   --nav-height: 8vh;
   --shadow-dark: rgba(19, 19, 19, 0.39) 0px 2px 8px 0px;
   --shadow-light: rgba(63, 63, 63, 0.349) 0px 2px 8px 0px;
@@ -154,7 +154,7 @@ main {
 }
 
 .stock-status.in-stock {
-  background-color: var(--secondary);
+  background-color: var(--primary);
 }
 
 .stock-status.almost-sold-out {
