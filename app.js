@@ -56,14 +56,24 @@ const app = new Vue({
     ],
   },
   methods: {
-    updateProduct(productId, variantColor, variantImage, variantInventory) {
+    updateProduct(productId, variantImage, variantInventory) {
       let product = this.products.filter((product) => product.id === productId);
       product[0].image = variantImage;
       product[0].inventory = variantInventory;
-      console.log(variantColor);
     },
     addToCart() {
       this.cartCount += 1;
     },
+    checkStock(productId) {
+      let product = this.products.filter((product) => product.id === productId);
+      let productInventory = product[0].inventory;
+
+      if (productInventory > 0) return true;
+
+      return false;
+    },
   },
+  // beforeMount() {
+  //   this.checkStock();
+  // },
 });
