@@ -1,3 +1,5 @@
+var eventBus = new Vue();
+
 Vue.component("navbar", {
   props: ["cartCount"],
   template: `
@@ -61,8 +63,7 @@ Vue.component("product", {
         >
           Add To Cart
         </button>
-
-        
+ 
         <button
           v-if="isProductInCart()"
           @click="deleteFromCart()"
@@ -72,26 +73,12 @@ Vue.component("product", {
           Delete from Cart
         </button>
 
-        <div class="reviews">
-          <h3>Reviews: </h3>
-          <h4 v-if="!product.reviews.length" style="color:red">There are no reviews yet</h4>
-          <div class="review" v-for="review in product.reviews">
-            <p>{{review.rating}} stars from {{review.name}}</p>
-            <p style="font-style:italic;">"{{review.review}}"</p> 
-            ------------------
-          </div>
-        </div>
-        <hr />
-        <product-review @review-submitted="addReview"></product-review>
+        <product-tabs :reviews="product.reviews"></product-tabs>
       </div>  
     </div>
   `,
   methods: {
     // Component's methods (LOCAL)
-    addReview(productReview) {
-      console.log(this.product.reviews, productReview);
-      this.product.reviews.push(productReview);
-    },
 
     isProductInCart() {
       if (this.cart.includes(this.product.id)) return true;
@@ -103,6 +90,39 @@ Vue.component("product", {
     deleteFromCart() {
       this.$emit("delete-from-cart", this.product.id, "remove");
     },
+  },
+  mounted() {
+    eventBus.$on("review-submitted", (productReview) => {
+      this.product.reviews.push(productReview);
+    });
+  },
+});
+
+Vue.component("product-tabs", {
+  props: ["reviews"],
+  template: `
+    <div class="product-tabs">
+      <span class="tab" :class="{active: selectedTab === tab}" v-for="tab in tabs" @click="selectedTab = tab">{{tab}} </span>
+
+      <div class="reviews" v-show="selectedTab === 'Reviews'">
+        <h3>Reviews: </h3>
+        <h4 v-if="!reviews.length" style="color:red">There are no reviews yet</h4>
+        <div class="review" v-for="review in reviews">
+          <p>{{review.rating}} stars from {{review.name}}</p>
+          <p style="font-style:italic;">"{{review.review}}"</p> 
+          ------------------
+        </div>
+      </div>
+ 
+      <product-review v-show="selectedTab === 'Make a Review'" ></product-review>
+    </div>
+  `,
+
+  data() {
+    return {
+      tabs: ["Reviews", "Make a Review"],
+      selectedTab: "Reviews",
+    };
   },
 });
 
@@ -151,7 +171,7 @@ Vue.component("product-review", {
         review: this.review,
         rating: this.rating,
       };
-      this.$emit("review-submitted", productReview);
+      eventBus.$emit("review-submitted", productReview);
       this.name = null;
       this.review = null;
       this.rating = null;

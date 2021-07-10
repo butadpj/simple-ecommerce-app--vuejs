@@ -183,3 +183,24 @@ main {
   cursor: pointer;
   filter: saturate(0.8);
 }
+
+.product-info .tab {
+  font-size: 1.1em;
+  margin-right: 1em;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.4s ease;
+}
+
+.product-info .tab:hover {
+  font-size: 1.2em;
+}
+
+.product-info .tab.active {
+  color: var(--primary);
+  text-decoration: underline;
+}
+
+.product-info .tab.active:hover {
+  font-size: 1.1em;
+}
