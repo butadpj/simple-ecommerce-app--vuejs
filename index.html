@@ -62,7 +62,7 @@
                     <div class="colors">
                       <div
                         v-for="color in product.variants.colors"
-                        @mouseover="updateProduct(product.id, color.variantImage, color.inventory); checkStock(product.id);"
+                        @mouseover="updateProduct(product.id, color.variantImage, color.inventory)"
                         :style="{backgroundColor: color.name}"
                       ></div>
                     </div>
