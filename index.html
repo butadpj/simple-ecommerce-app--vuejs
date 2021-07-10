@@ -13,73 +13,21 @@
   </head>
   <body>
     <div id="app">
-      <div class="navbar">
-        <h2 class="title">Simple Ecommerce App</h2>
-        <div class="cart-info">
-          <span class="material-icons-outlined"> shopping_cart </span>
-          <div class="cart-count">{{cartCount}}</div>
-        </div>
-      </div>
-
+      <navbar :cart-count="cart.length"></navbar>
       <main>
         <hr />
         <section class="products">
           <h2 class="title">Products</h2>
 
           <div class="product-wrapper" v-for="product in products">
-            <div class="product">
-              <img
-                class="product-img"
-                :src="product.image"
-                :alt="`${product.name} image`"
-              />
-              <div class="product-info">
-                <h2 class="name">{{ product.name }}</h2>
-                <div
-                  v-if="product.inventory >= 10"
-                  class="stock-status in-stock"
-                >
-                  <p>In Stock</p>
-                </div>
-
-                <p
-                  v-else-if="product.inventory <= 5 && product.inventory > 0"
-                  class="stock-status almost-sold-out"
-                >
-                  Almost Sold Out
-                </p>
-                <p v-else class="stock-status out-of-stock">Out of Stock</p>
-
-                <ul class="details">
-                  <li>Original</li>
-                  <li>Good Quality</li>
-                  <li>Durable</li>
-                </ul>
-
-                <div class="variants">
-                  <div class="color-variant">
-                    <h3>Colors:</h3>
-                    <div class="colors">
-                      <div
-                        v-for="color in product.variants.colors"
-                        @mouseover="updateProduct(product.id, color.variantImage, color.inventory)"
-                        :style="{backgroundColor: color.name}"
-                      ></div>
-                    </div>
-                  </div>
-                </div>
-
-                <button
-                  @click="addToCart()"
-                  type="button"
-                  class="button"
-                  :class="{disabled: !checkStock(product.id)}"
-                  :disabled="!checkStock(product.id)"
-                >
-                  Add To Cart
-                </button>
-              </div>
-            </div>
+            <product
+              :product="product"
+              :cart="cart"
+              :stock-status="stockStatus"
+              :update-product="updateProduct"
+              @add-to-cart="updateCart"
+              @delete-from-cart="updateCart"
+            ></product>
             <hr />
           </div>
         </section>

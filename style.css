@@ -121,11 +121,12 @@ main {
 
 .products .product {
   display: flex;
+  align-items: flex-start;
   margin: 2em 0;
 }
 
 .product-img {
-  width: 20rem;
+  width: 25rem;
   object-fit: cover;
   border: 1px solid black;
   padding: 2em;
